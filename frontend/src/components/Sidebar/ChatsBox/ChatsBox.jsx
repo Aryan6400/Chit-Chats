@@ -59,7 +59,7 @@ function ChatsBox() {
                             <div className="chat-name-and-desc">
                                 <h3>{chat.isGroup ? chat.name : getChatName(chat)}</h3>
                                 <div className='last-message'>
-                                    {chat.lastMessage ? <p>{chat.isGroup ? chat.lastMessage.sender.name + " : " : null} {chat.lastMessage.text}</p> : <p>No new message.</p>}
+                                    {chat.lastMessage ? <p>{chat.isGroup ? chat.lastMessage.sender.name.split(" ")[0].slice(0,15) + " : " : null} {chat.lastMessage.text.slice(0,20)}</p> : <p>No new message.</p>}
                                     {chat.lastMessage ? <span>{chat.lastMessage.createdAt.split("T")[1].split(".")[0].slice(0, 5)}</span> : <span>Today</span>}
                                 </div>
                             </div>
