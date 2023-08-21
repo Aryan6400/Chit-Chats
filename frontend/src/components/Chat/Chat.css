@@ -40,6 +40,7 @@
     float: right;
     clear: both;
     margin: 0px 0px 20px;
+    overflow-wrap: anywhere;
 }
 
 .chats {
@@ -47,6 +48,7 @@
     float: left;
     clear: both;
     margin: 0px 0 20px;
+    overflow-wrap: anywhere;
 }
 
 .chatText {
