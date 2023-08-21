@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Auth.css";
 import { Backdrop, CircularProgress } from "@mui/material";
 import database from "../database";
+const port = process.env.port || 8080;
 
 
 function Login() {
@@ -27,7 +28,7 @@ function Login() {
             return;
         }
         setLoading(true);
-        database.postData("http://localhost:8080/auth/login", user).then((data) => {
+        database.postData(`http://localhost:${port}/auth/login`, user).then((data) => {
             if(data.user) {
                 localStorage.setItem("user", JSON.stringify(data));
                 navigate("/welcome");
