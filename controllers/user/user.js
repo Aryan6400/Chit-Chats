@@ -14,5 +14,4 @@ async function getUsers(req, res) {
     res.send(users);
 }
 
-
 export { getUsers };

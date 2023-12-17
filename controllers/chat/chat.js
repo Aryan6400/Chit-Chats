@@ -14,8 +14,6 @@ const getChats = asyncHandler(async (req, res) => {
             path: "lastMessage.sender",
             select: "name username",
         });
-        // console.log(chats);
-        // console.log(req.userId);
         res.send(chats);
     } catch (error) {
         res.status(400).json({ message: error.message });
@@ -40,7 +38,7 @@ const accessChats = asyncHandler(async (req, res) => {
         select: "name username",
     });
     if (chats.length > 0) {
-        res.status(200).json(chats[0]);
+        res.status(200).json([]);
     }
     else {
         const receiver = await User.find({ _id: userId });
