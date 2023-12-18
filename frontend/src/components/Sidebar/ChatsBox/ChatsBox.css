@@ -22,6 +22,7 @@
     padding: 10px 0;
     box-shadow: 0 0 1px black;
     margin: 2px 0;
+    cursor: pointer;
 }
 
 .chat-box:hover{

@@ -63,7 +63,6 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    /* padding-left: 20px; */
 }
 
 #search{
@@ -74,6 +73,45 @@
     box-shadow: 0 0 2px rgb(210, 210, 210);
     text-align: center;
     color: black;
+}
+
+.search-results{
+    position: absolute;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    z-index: 5;
+    box-shadow: 3px 3px 3px rgb(153, 153, 153);
+    width: 11.75rem;
+    min-width: 100px;
+}
+
+.searched-names{
+    display: flex;
+    gap: 5px;
+    padding: 3px;
+    margin-left: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.searched-user-image img, .searched-user-image svg{
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+}
+
+.user-image svg{
+    color: rgb(200, 200, 200);
+    background-color: rgb(231, 231, 231);
+}
+
+.search-result-hr{
+    margin: 3px 10px !important;
 }
 
 @media (max-width: 1300px) {

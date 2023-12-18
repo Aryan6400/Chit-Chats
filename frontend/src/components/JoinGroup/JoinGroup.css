@@ -1,0 +1,29 @@
+.join-group-container{
+    text-align: center;
+}
+
+.join-group{
+    width: 75%;
+}
+
+.searched-groups{
+    width: 400px;
+}
+
+.join-group-search-bar{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.join-group-input{
+    width: 100%;
+    min-width: 15rem;
+    height: 2.5rem;
+    border-radius: 17px;
+    border: 1px solid rgb(210, 210, 210);
+    box-shadow: 0 0 2px rgb(210, 210, 210);
+    text-align: center;
+    color: black;
+}

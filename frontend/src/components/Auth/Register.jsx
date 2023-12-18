@@ -3,7 +3,6 @@ import "./Auth.css";
 import { useNavigate } from "react-router-dom";
 import { Backdrop, CircularProgress } from "@mui/material";
 import database from "../database";
-import { useToast } from '@chakra-ui/react'
 
 
 function Register() {
@@ -12,7 +11,6 @@ function Register() {
         username: "",
         password: ""
     })
-    const toast = useToast();
     const [picture, setPic] = useState("");
     const [isLoading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -28,57 +26,31 @@ function Register() {
 
     const PostDetails = (pic) => {
         setLoading(true);
-        if(!pic) {
-            toast({
-                title: 'Please select an image',
-                status: 'warning',
-                variant: 'left-accent',
-                duration: 5000,
-                isClosable: true,
-                position: 'bottom',
-            });
+        if (!pic) {
+            setLoading(false);
             return;
         }
-        if(pic.type === "image/jpeg" || pic.type === "image/png") {
-            const data = new FormData();
-            data.append("file", pic);
-            data.append("upload_preset", "Coride Chat");
-            data.append("cloud_name", "dfj3rhjvl");
-            fetch("https://api.cloudinary.com/v1_1/dfj3rhjvl/image/upload", {
-                method:"POST",
-                body:data, 
-            })
-            .then((res)=>res.json())
-            .then((data)=>{
+        const data = new FormData();
+        data.append("file", pic);
+        data.append("upload_preset", "Coride Chat");
+        data.append("cloud_name", "dfj3rhjvl");
+        fetch("https://api.cloudinary.com/v1_1/dfj3rhjvl/image/upload", {
+            method: "POST",
+            body: data,
+        })
+            .then((res) => res.json())
+            .then((data) => {
                 setPic(data.url.toString());
                 setLoading(false);
-            }).catch(error=>{
+            }).catch(error => {
                 console.log(error);
                 setLoading(false);
             })
-        }else{
-            toast({
-                title: 'Please select an image',
-                status: 'warning',
-                variant: 'left-accent',
-                duration: 5000,
-                isClosable: true,
-                position: 'bottom',
-            });
-            return;
-        }
     }
+
     function handleClick() {
         if (user.name == "" || user.username == "" || user.password == "" || picture == "") {
-            toast({
-                title: 'Please fill all the fields!!',
-                status: 'warning',
-                variant: 'left-accent',
-                duration: 5000,
-                isClosable: true,
-                position: 'bottom',
-            });
-            // alert("Please fill all the fields!!");
+            alert("Please fill all the fields!!");
             return;
         }
         setLoading(true);
@@ -122,7 +94,9 @@ function Register() {
                     <label >Password:</label>
                     <input type="password" onChange={handleChange} className="form-password" name="password" value={user.password} />
                     <label >Picture:</label>
-                    <div className="picture-input-div"><input type="file" accept="image/*" onChange={(e)=>PostDetails(e.target.files[0])} id="form-picture" /></div>
+                    <div className="picture-input-div">
+                        <input type="file" accept="image/*" onChange={(e) => PostDetails(e.target.files[0])} id="form-picture" />
+                    </div>
                     <button type="submit" onClick={handleClick} className="btn-register">SignUp</button>
                 </div>
             </div>

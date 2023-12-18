@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Avatar, Grid, GridItem } from "@chakra-ui/react";
 import { EditIcon } from "@chakra-ui/icons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./Header.css";
 import { useChat } from "../../context/ChatContext";
+import { changePopupImage, togglePopup } from "../../Features/popupImageSlice";
 
 function Header() {
     const darkTheme = useSelector((state) => state.darkMode);
     const { selectedChat } = useChat();
+    const dispatch=useDispatch();
 
     function getChatName(){
         const userInfo = JSON.parse(localStorage.getItem("user"));
@@ -21,6 +23,12 @@ function Header() {
         else return selectedChat.users[0].picture;
     }
 
+    const triggerModal = (e) => {
+        const url=e.target.src;
+        dispatch(togglePopup());
+        dispatch(changePopupImage(url));
+    }
+
     return (
         <div className={"header" + (darkTheme ? " dark-theme-font" : "")}>
             <Grid className="name-and-avatar" templateColumns="1fr 10fr 1fr" gap="0.5rem">
@@ -29,7 +37,7 @@ function Header() {
                     alignSelf="center"
                     className="avatar"
                 >
-                    <Avatar src={selectedChat.isGroup ? selectedChat.picturePath : getPicturePath()} />
+                    <Avatar src={selectedChat.isGroup ? selectedChat.picturePath : getPicturePath()} onClick={triggerModal} name={selectedChat.isGroup ? selectedChat.name : getChatName()} />
                 </GridItem>
                 <GridItem
                     fontSize="1.2rem"

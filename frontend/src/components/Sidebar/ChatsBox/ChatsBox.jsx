@@ -29,7 +29,8 @@ function ChatsBox() {
             setChats(result);
         }
         getChats();
-    }, [])
+    }, [chats])
+
 
     function getChatPicture(chat) {
         const userInfo = JSON.parse(localStorage.getItem("user"));
@@ -54,7 +55,7 @@ function ChatsBox() {
                             navigate("/chat");
                         }}>
                             <div className="chat-avatar">
-                                <Avatar src={chat.isGroup ? chat.picturePath : getChatPicture(chat)} />
+                                <Avatar src={chat.isGroup ? chat.picturePath : getChatPicture(chat)} name={chat.isGroup ? chat.name : getChatName(chat)} />
                             </div>
                             <div className="chat-name-and-desc">
                                 <h3>{chat.isGroup ? chat.name : getChatName(chat)}</h3>

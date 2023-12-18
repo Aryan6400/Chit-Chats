@@ -8,15 +8,6 @@ import { useSelector } from "react-redux";
 function Chat({ data }) {
     const userInfo = JSON.parse(localStorage.getItem("user"));
     const scrollableDivRef = useRef(null);
-    // function formatDate(dateString) {
-    //     const [year, month, day] = dateString.split('-');
-    //     const months = [
-    //         'January', 'February', 'March', 'April', 'May', 'June',
-    //         'July', 'August', 'September', 'October', 'November', 'December'
-    //     ];
-    //     const monthName = months[Number(month) - 1];
-    //     return `${day} ${monthName}, ${year}`;
-    // }
     const darkTheme = useSelector((state) => state.darkMode);
 
     useEffect(() => {
@@ -32,7 +23,7 @@ function Chat({ data }) {
                         alignSelf="start"
                         className="avatar"
                     >
-                        {userInfo.user._id != data.sender._id && <Avatar src={data.sender.picture} >
+                        {userInfo.user._id != data.sender._id && <Avatar src={data.sender.picture} name="Profile Picture" >
                             <AvatarBadge >
                                 <VerifiedIcon id="verified-icon-svg"/>
                             </AvatarBadge>

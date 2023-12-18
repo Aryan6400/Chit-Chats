@@ -97,7 +97,6 @@ function Home() {
           <Header />
           {mode == "Offline" && <p style={{ "color": "red", "textAlign": "center", "backgroundColor": "#ffd400", "padding": "6px", "margin": "-10px -20px" }}>You are offline!! Go online to view new chats.</p>}
         </GridItem>
-
         <GridItem
           className="chatBox"
           ref={scrollableDivRef}
@@ -112,7 +111,6 @@ function Home() {
             }
           </ScrollableFeed>
         </GridItem>
-
         <GridItem
         >
           <InputChat onSubmit={sendMessage} />
@@ -122,19 +120,3 @@ function Home() {
 }
 
 export default Home;
-
-
-
-
-
-
-{/* let dateChange = false;
-if (index == 0) {
-newdate = chat.time.slice(0, 10);
-date = newdate;
-}
-date = newdate;
-if (date != chat.time.slice(0, 10)) {
-dateChange = true;
-newdate = chat.time.slice(0, 10);
-} */}

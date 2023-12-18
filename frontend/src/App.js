@@ -8,9 +8,11 @@ import CreateGroup from "./components/CreateGroup/CreateGroup";
 import "./App.css";
 import { useSelector } from "react-redux";
 import { useChat } from "./context/ChatContext";
+import JoinGroup from "./components/JoinGroup/JoinGroup";
+import ImagePopup from "./components/PopupImage/PopupImage";
 
 function App() {
-  const darkTheme = useSelector((state)=>state.darkMode);
+  const darkTheme = useSelector((state) => state.darkMode);
   const { selectedChat } = useChat();
   return (
     <BrowserRouter>
@@ -25,13 +27,13 @@ function App() {
                 </div>
 
                 {selectedChat ?
-                <div id="right-panel" className={darkTheme ? "dark-panel" : ""}>
-                  <Home />
-                </div>
-                :
-                <div id="welcome-panel" className={darkTheme ? "dark-panel" : ""}>
-                  <Welcome />
-                </div>
+                  <div id="right-panel" className={darkTheme ? "dark-panel" : ""}>
+                    <Home />
+                  </div>
+                  :
+                  <div id="welcome-panel" className={darkTheme ? "dark-panel" : ""}>
+                    <Welcome />
+                  </div>
                 }
 
               </div>
@@ -75,8 +77,27 @@ function App() {
           } />
         </Route>
 
+        <Route element={<PrivateComponent />}>
+          <Route path="/join" element={
+            <div id="AppContainer" className={darkTheme ? "dark-container" : ""}>
+              <div className="App">
+
+                <div id="left-panel" className={darkTheme ? "dark-panel" : ""}>
+                  <Sidebar />
+                </div>
+
+                <div id="welcome-panel" className={darkTheme ? "dark-panel" : ""}>
+                  <JoinGroup />
+                </div>
+
+              </div>
+            </div>
+          } />
+        </Route>
+
         <Route path="/" element={<Auth />} />
       </Routes>
+      <ImagePopup/>
     </BrowserRouter>
   );
 }
