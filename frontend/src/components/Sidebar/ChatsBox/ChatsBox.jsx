@@ -29,7 +29,7 @@ function ChatsBox() {
             setChats(result);
         }
         getChats();
-    }, [chats])
+    }, [])
 
 
     function getChatPicture(chat) {
