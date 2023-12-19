@@ -44,15 +44,13 @@ const accessChats = asyncHandler(async (req, res) => {
         const receiver = await User.find({ _id: userId });
         const sender = await User.find({ _id: req.userId });
         const chatName = sender[0].name + "+" + receiver[0].name;
-        const picturePath = sender[0].picture + "+" + receiver[0].picture;
+        const picturePath = sender[0].resizedPicture + "+" + receiver[0].resizedPicture;
         const newChat = {
             name: chatName,
             isGroup: false,
             users: [userId, req.userId],
             picture: picturePath
         };
-        console.log(chatName);
-        console.log(picturePath);
         try {
             const createdChat = await Chat.create(newChat);
             const updatedReceiver = await User.findByIdAndUpdate(userId, { $push: { chats: createdChat._id } });

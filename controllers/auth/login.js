@@ -8,7 +8,8 @@ async function register(req, res){
         name,
         username,
         password,
-        picture
+        picture,
+        resizedPicture
     } = req.body;
     try{
         const foundUser = await User.findOne({username:username});
@@ -19,7 +20,8 @@ async function register(req, res){
             name,
             username,
             password: hashedPassword,
-            picture
+            picture,
+            resizedPicture
         })
         const savedUser = await newUser.save();
         const token = jwt.sign({id: savedUser._id}, process.env.USER_SECRET, {expiresIn:"12hr"})
