@@ -1,4 +1,4 @@
-import Home from "./components/Home/Home";
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Auth from "./components/Auth/Auth";
@@ -9,7 +9,11 @@ import "./App.css";
 import { useSelector } from "react-redux";
 import { useChat } from "./context/ChatContext";
 import JoinGroup from "./components/JoinGroup/JoinGroup";
-import ImagePopup from "./components/PopupImage/PopupImage";
+// import Home from "./components/Home/Home";
+// import ImagePopup from "./components/PopupImage/PopupImage";
+
+const ImagePopup = lazy(() => import("./components/PopupImage/PopupImage"));
+const Home = lazy(() => import("./components/Home/Home"));
 
 function App() {
   const darkTheme = useSelector((state) => state.darkMode);
@@ -17,29 +21,6 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<PrivateComponent />}>
-          <Route path="/chat" element={
-            <div id="AppContainer" className={darkTheme ? "dark-container" : ""}>
-              <div className="App">
-
-                <div id="left-panel" className={darkTheme ? "dark-panel" : ""}>
-                  <Sidebar />
-                </div>
-
-                {selectedChat ?
-                  <div id="right-panel" className={darkTheme ? "dark-panel" : ""}>
-                    <Home />
-                  </div>
-                  :
-                  <div id="welcome-panel" className={darkTheme ? "dark-panel" : ""}>
-                    <Welcome />
-                  </div>
-                }
-
-              </div>
-            </div>
-          } />
-        </Route>
 
         <Route element={<PrivateComponent />}>
           <Route path="/welcome" element={
@@ -53,6 +34,32 @@ function App() {
                 <div id="welcome-panel" className={darkTheme ? "dark-panel" : ""}>
                   <Welcome />
                 </div>
+
+              </div>
+            </div>
+          } />
+        </Route>
+
+        <Route element={<PrivateComponent />}>
+          <Route path="/chat" element={
+            <div id="AppContainer" className={darkTheme ? "dark-container" : ""}>
+              <div className="App">
+
+                <div id="left-panel" className={darkTheme ? "dark-panel" : ""}>
+                  <Sidebar />
+                </div>
+
+                {selectedChat ?
+                  <div id="right-panel" className={darkTheme ? "dark-panel" : ""}>
+                    <Suspense fallback={<p>Loading messages...</p>}>
+                      <Home />
+                    </Suspense>
+                  </div>
+                  :
+                  <div id="welcome-panel" className={darkTheme ? "dark-panel" : ""}>
+                    <Welcome />
+                  </div>
+                }
 
               </div>
             </div>
@@ -97,7 +104,9 @@ function App() {
 
         <Route path="/" element={<Auth />} />
       </Routes>
-      <ImagePopup/>
+      <Suspense fallback={<p>Profile is loading...</p>}>
+        <ImagePopup />
+      </Suspense>
     </BrowserRouter>
   );
 }

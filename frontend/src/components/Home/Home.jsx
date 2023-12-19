@@ -52,7 +52,6 @@ function Home() {
       if(!selectedChatCompare || selectedChatCompare._id != newMessageReceived.chatId._id){
         // notifications...
       }else {
-        console.log("received");
         setChats([...chats, newMessageReceived]);
       }
     })

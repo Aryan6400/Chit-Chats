@@ -9,7 +9,7 @@ function ChatProvider({children}){
 
     useEffect(()=>{
         setSelectedChat((prev)=>prev);
-    }, [])
+    }, [])    
     
     return (
         <ChatContext.Provider value={{user, setUser, selectedChat, setSelectedChat, chats, setChats}}>

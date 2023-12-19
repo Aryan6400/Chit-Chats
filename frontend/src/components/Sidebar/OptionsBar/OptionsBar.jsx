@@ -18,6 +18,7 @@ function OptionsBar() {
     const darkTheme = useSelector((state) => state.darkMode);
     const [name, setName] = useState("");
     const [picture, setPicture] = useState("");
+    const [modalPicture, setModalPicture] = useState("");
     const [newUser, setNewUser] = useState("");
     const [users, setUsers] = useState([]);
     const [show, setShow] = useState(false);
@@ -27,11 +28,14 @@ function OptionsBar() {
         let user = localStorage.getItem("user");
         user = JSON.parse(user);
         setName(user.user.name);
-        setPicture(user.user.picture);
+        setPicture(user.user.resizedPicture);
+        setModalPicture(user.user.picture);
     }, []);
 
     function logout() {
         localStorage.removeItem("user");
+        setChats([]);
+        setSelectedChat();
         navigate("/");
     }
 
@@ -71,10 +75,17 @@ function OptionsBar() {
         }, 0);
     }
 
+    const handleKeyDown = (e) => {
+        if(e.key==='Esc' || e.key==='Escape'){
+            setShow(false);
+        }
+    }
+
     const startNewChat = async (id) => {
         const data = {
             userId: id
         }
+        setNewUser("");
         const userInfo = JSON.parse(localStorage.getItem("user"));
         try {
             const response = await fetch("http://localhost:8080/chats", {
@@ -91,15 +102,15 @@ function OptionsBar() {
             });
             const result = await response.json();
             if (result != []) {
-                setChats([...chats, result]);
+                setChats([result[0], ...chats]);
             }
         } catch (error) {
             console.log(error);
         }
     }
 
-    const triggerModal = (e) => {
-        const url = e.target.src;
+    const triggerModal = () => {
+        const url = modalPicture;
         dispatch(togglePopup());
         dispatch(changePopupImage(url));
     }
@@ -121,7 +132,7 @@ function OptionsBar() {
             <div className="search-bar-and-options">
                 <div>
                     <div className="search-bar">
-                        <input id="search" type="text" placeholder="Search" value={newUser} onChange={findUser} onBlur={handleBlur} />
+                        <input id="search" type="text" placeholder="Search" value={newUser} onChange={findUser} onKeyDown={handleKeyDown} onBlur={handleBlur} />
                     </div>
 
                     {show && <div className="search-results">
@@ -129,9 +140,9 @@ function OptionsBar() {
                             users.map((el, index) => {
                                 return (
                                     <>
-                                        <div key={index} className="searched-names" onMouseDown={() => startNewChat(el._id)}>
+                                        <div key={el._id} className="searched-names" onMouseDown={() => startNewChat(el._id)}>
                                             <div className="searched-user-image">
-                                                <Avatar src={el.picture} name={el.name} />
+                                                <Avatar src={el.resizedPicture} name={el.name} />
                                             </div>
                                             <div>{el.name}</div>
                                         </div>

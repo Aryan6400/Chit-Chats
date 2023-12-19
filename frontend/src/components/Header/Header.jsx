@@ -19,8 +19,8 @@ function Header() {
 
     function getPicturePath(){
         const userInfo = JSON.parse(localStorage.getItem("user"));
-        if(userInfo.user._id == selectedChat.users[0]._id) return selectedChat.users[1].picture;
-        else return selectedChat.users[0].picture;
+        if(userInfo.user._id == selectedChat.users[0]._id) return selectedChat.users[1].resizedPicture;
+        else return selectedChat.users[0].resizedPicture;
     }
 
     const triggerModal = (e) => {

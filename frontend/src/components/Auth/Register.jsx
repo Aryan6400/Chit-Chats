@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./Auth.css";
 import { useNavigate } from "react-router-dom";
+import imageCompression from "browser-image-compression";
 import { Backdrop, CircularProgress } from "@mui/material";
-import database from "../database";
 
 
 function Register() {
@@ -12,6 +12,7 @@ function Register() {
         password: ""
     })
     const [picture, setPic] = useState("");
+    const [resizedPicture, setResizedPic] = useState("");
     const [isLoading, setLoading] = useState(false);
     const navigate = useNavigate();
     function handleChange(event) {
@@ -24,12 +25,29 @@ function Register() {
         })
     }
 
-    const PostDetails = (pic) => {
+    const resizeImage = async(pic) => {
         setLoading(true);
         if (!pic) {
             setLoading(false);
             return;
         }
+        const options = {
+            maxSizeMB: 1,
+            maxWidthOrHeight: 144,
+            useWebWorker: true
+        }
+        try{
+            const result = await imageCompression(pic,options);
+            const newPic = new File([result],`compressed-${pic.name}`,{lastModified:result.lastModified});
+            PostDetails(pic,0);
+            PostDetails(newPic,1);
+        } catch(error){
+            console.log(error);
+            setLoading(false);
+        }
+    }
+
+    const PostDetails = (pic,num) => {
         const data = new FormData();
         data.append("file", pic);
         data.append("upload_preset", "Coride Chat");
@@ -40,15 +58,16 @@ function Register() {
         })
             .then((res) => res.json())
             .then((data) => {
-                setPic(data.url.toString());
-                setLoading(false);
+                if(num==0) setPic(data.url.toString());
+                else setResizedPic(data.url.toString());
+                console.log(data.url.toString());
+                if(num==1) setLoading(false);
             }).catch(error => {
                 console.log(error);
-                setLoading(false);
             })
     }
 
-    function handleClick() {
+    async function handleClick() {
         if (user.name == "" || user.username == "" || user.password == "" || picture == "") {
             alert("Please fill all the fields!!");
             return;
@@ -58,11 +77,24 @@ function Register() {
             name: user.name,
             username: user.username,
             password: user.password,
-            picture: picture
+            picture: picture,
+            resizedPicture: resizedPicture
         }
-        database.postData("http://localhost:8080/auth/register", newUser).then((data) => {
-            if (data.user) {
-                localStorage.setItem("user", JSON.stringify(data));
+        try {
+            const response = await fetch("http://localhost:8080/auth/register", {
+                method: "POST",
+                cache: "no-cache",
+                credentials: "same-origin",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                redirect: "follow",
+                referrerPolicy: "no-referrer",
+                body: JSON.stringify(newUser),
+            });
+            const result = await response.json();
+            if (result.user) {
+                localStorage.setItem("user", JSON.stringify(result));
                 navigate("/welcome");
                 setLoading(false);
             } else {
@@ -74,8 +106,11 @@ function Register() {
                 })
                 alert("Username already exists!!");
             }
-        })
+        } catch (error) {
+            console.log(error);
+        }
     }
+
     return (
         <>
             <Backdrop
@@ -95,7 +130,7 @@ function Register() {
                     <input type="password" onChange={handleChange} className="form-password" name="password" value={user.password} />
                     <label >Picture:</label>
                     <div className="picture-input-div">
-                        <input type="file" accept="image/*" onChange={(e) => PostDetails(e.target.files[0])} id="form-picture" />
+                        <input type="file" accept="image/*" onChange={(e) => resizeImage(e.target.files[0])} id="form-picture" />
                     </div>
                     <button type="submit" onClick={handleClick} className="btn-register">SignUp</button>
                 </div>

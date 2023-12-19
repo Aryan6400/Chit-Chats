@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Auth.css";
 import { Backdrop, CircularProgress } from "@mui/material";
-import database from "../database";
-const port = process.env.port || 8080;
 
 
 function Login() {
@@ -22,18 +20,30 @@ function Login() {
             };
         })
     }
-    function handleClick() {
-        if(user.username=="" || user.password=="") {
+    async function handleClick() {
+        if (user.username == "" || user.password == "") {
             alert("Please fill all the credentials.");
             return;
         }
         setLoading(true);
-        database.postData(`http://localhost:${port}/auth/login`, user).then((data) => {
-            if(data.user) {
-                localStorage.setItem("user", JSON.stringify(data));
+        try {
+            const response = await fetch("http://localhost:8080/auth/login", {
+                method: "POST",
+                cache: "no-cache",
+                credentials: "same-origin",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                redirect: "follow",
+                referrerPolicy: "no-referrer",
+                body: JSON.stringify(user),
+            });
+            const result = await response.json();
+            if (result.user) {
+                localStorage.setItem("user", JSON.stringify(result));
                 navigate("/welcome");
                 setLoading(false);
-            }else{
+            } else {
                 setLoading(false);
                 setUser({
                     username: "",
@@ -41,12 +51,14 @@ function Login() {
                 })
                 alert("Invalid Credentials!!");
             }
-        })
+        } catch (error) {
+            console.log(error);
+        }
     }
     return (
         <>
             <Backdrop
-                sx={{color:"#fff", zIndex:5}}
+                sx={{ color: "#fff", zIndex: 5 }}
                 open={isLoading}
             >
                 <CircularProgress color="secondary" />

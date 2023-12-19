@@ -23,7 +23,7 @@ function Chat({ data }) {
                         alignSelf="start"
                         className="avatar"
                     >
-                        {userInfo.user._id != data.sender._id && <Avatar src={data.sender.picture} name="Profile Picture" >
+                        {userInfo.user._id != data.sender._id && <Avatar src={data.sender.resizedPicture} name="Profile Picture" >
                             <AvatarBadge >
                                 <VerifiedIcon id="verified-icon-svg"/>
                             </AvatarBadge>

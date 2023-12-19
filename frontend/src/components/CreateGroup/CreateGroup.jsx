@@ -109,7 +109,7 @@ function CreateGroup() {
                 <>
                   <div key={index} className="searched-names" onMouseDown={() => addUser({ id: el._id, name: el.name })}>
                     <div className="searched-user-image">
-                      <Avatar src={el.picture} name={el.name} />
+                      <Avatar src={el.resizedPicture} name={el.name} />
                     </div>
                     <div>{el.name}</div>
                   </div>

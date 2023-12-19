@@ -1,7 +1,3 @@
-.welcome-logo{
-    height: 20vw;
-}
-
 .welcome-container{
     display: flex;
     flex: 0.7;
@@ -11,4 +7,9 @@
     gap: 20px;
     color: rgba(0, 0, 0, 0.54);
     border-radius: 20px;
+}
+
+.welcome-container img{
+    height: 20vw;
+    width: auto;
 }

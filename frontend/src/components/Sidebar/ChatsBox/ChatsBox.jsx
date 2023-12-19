@@ -9,33 +9,12 @@ import { useChat } from '../../../context/ChatContext';
 function ChatsBox() {
     const navigate = useNavigate();
     const darkTheme = useSelector((state) => state.darkMode);
-    const [chats, setChats] = useState([]);
-    const [user, setUser] = useState();
-    const { setSelectedChat } = useChat();
-
-    useEffect(() => {
-        const userInfo = JSON.parse(localStorage.getItem("user"));
-        setUser(userInfo);
-        async function getChats() {
-            const response = await fetch("http://localhost:8080/chats", {
-                method: "GET",
-                cache: "no-cache",
-                credentials: "same-origin",
-                headers: { Authorization: `Bearer ${userInfo.token}` },
-                redirect: "follow",
-                referrerPolicy: "no-referrer"
-            });
-            const result = await response.json()
-            setChats(result);
-        }
-        getChats();
-    }, [])
-
+    const { chats, setSelectedChat } = useChat();
 
     function getChatPicture(chat) {
         const userInfo = JSON.parse(localStorage.getItem("user"));
-        if (userInfo.user._id == chat.users[0]._id) return chat.users[1].picture;
-        else return chat.users[0].picture;
+        if (userInfo.user._id == chat.users[0]._id) return chat.users[1].resizedPicture;
+        else return chat.users[0].resizedPicture;
     }
 
     function getChatName(chat) {
