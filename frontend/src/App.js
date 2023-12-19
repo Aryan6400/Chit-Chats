@@ -10,9 +10,8 @@ import { useSelector } from "react-redux";
 import { useChat } from "./context/ChatContext";
 import JoinGroup from "./components/JoinGroup/JoinGroup";
 // import Home from "./components/Home/Home";
-// import ImagePopup from "./components/PopupImage/PopupImage";
 
-const ImagePopup = lazy(() => import("./components/PopupImage/PopupImage"));
+// const ImagePopup = lazy(() => import("./components/PopupImage/PopupImage"));
 const Home = lazy(() => import("./components/Home/Home"));
 
 function App() {
@@ -104,9 +103,6 @@ function App() {
 
         <Route path="/" element={<Auth />} />
       </Routes>
-      <Suspense fallback={<p>Profile is loading...</p>}>
-        <ImagePopup />
-      </Suspense>
     </BrowserRouter>
   );
 }
