@@ -46,21 +46,21 @@
 
 @media (min-width: 1000px) {
   body {
-      width: calc(100% - 20px);
-      margin: auto;
+    width: calc(100% - 20px);
+    margin: auto;
   }
 }
 
 @media (min-width: 700px) {
   body {
-      width: calc(100% - 0px);
-      margin: auto;
+    width: calc(100% - 0px);
+    margin: auto;
   }
 }
 
 @media (min-width: 400px) {
   .chat p {
-      width: 330px;
+    width: 330px;
   }
 }
 
@@ -69,66 +69,81 @@
 
 @media (max-width: 300px) {
   .header p {
-      font-size: 0.8rem;
+    font-size: 0.8rem;
   }
 
   .header span {
-      font-size: 1rem;
+    font-size: 1rem;
   }
 
   .header .avatar img {
-      border-radius: 50%;
-      max-width: 30px;
-      min-width: 20px;
+    border-radius: 50%;
+    max-width: 30px;
+    min-width: 20px;
   }
 
   .chatText,
   .myChatText {
-      font-size: 0.6rem;
+    font-size: 0.6rem;
   }
 }
 
 @media (max-width: 350px) {
   .header p {
-      font-size: 1rem;
+    font-size: 1rem;
   }
 
   .header span {
-      font-size: 1.2rem;
+    font-size: 1.2rem;
   }
 
   .header .avatar img {
-      border-radius: 50%;
-      max-width: 45px;
-      min-width: 30px;
+    border-radius: 50%;
+    max-width: 45px;
+    min-width: 30px;
   }
 
   .chatText,
   .myChatText {
-      font-size: 0.7rem;
+    font-size: 0.7rem;
   }
 }
 
 @media (max-width: 400px) {
   .header p {
-      font-size: 1.1rem;
+    font-size: 1.1rem;
   }
 
   .header span {
-      font-size: 1.3rem;
+    font-size: 1.3rem;
   }
 
   .header .avatar img {
-      border-radius: 50%;
-      max-width: 60px;
-      min-width: 40px;
+    border-radius: 50%;
+    max-width: 60px;
+    min-width: 40px;
   }
 }
 
 @media (max-width: 500px) {
-
   .chatText,
   .myChatText {
-      font-size: 0.8rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 850px){
+  #AppContainer {
+    padding: 20px 20px 20px;
+    margin: 20px 20px;
+  }
+  .App{
+    gap: 20px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .App {
+    grid-template-columns: 1fr 1.5fr;
   }
 }

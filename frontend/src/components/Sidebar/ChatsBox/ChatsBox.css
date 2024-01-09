@@ -82,4 +82,26 @@
         max-width: 30px;
         min-width: 20px;
     }
-  }
+    .chat-box{
+        gap: 5px;
+    }
+}
+
+@media (max-width: 900px) {
+    .chat-name-and-desc h3{
+      font-size: 0.9rem;
+    }
+    .last-message p{
+        font-size: 11px;
+    }
+    .last-message span{
+        font-size: 9px;
+    }
+    .chat-avatar img {
+        max-width: 28px;
+        min-width: 18px;
+    }
+    .chat-box{
+        padding: 10px 0px 10px 2px;
+    }
+}
