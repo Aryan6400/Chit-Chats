@@ -119,6 +119,7 @@ function Register() {
             >
                 <CircularProgress color="secondary" />
             </Backdrop>
+            
             <div className="signup-comp">
                 <h1>Sign Up to Proceed</h1>
                 <div className="register-form-box">

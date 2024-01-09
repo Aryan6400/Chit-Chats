@@ -63,14 +63,15 @@ function Login() {
             >
                 <CircularProgress color="secondary" />
             </Backdrop>
+
             <div className="signup-comp">
-                <h1>Login to proceed.</h1>
+                <h1>Login to proceed</h1>
                 <div className="login-form-box">
                     <label >Email:</label>
                     <input type="email" onChange={handleChange} className="form-email" name="username" value={user.username} />
                     <label >Password:</label>
                     <input type="password" onChange={handleChange} className="form-password" name="password" value={user.password} />
-                    <button type="submit" onClick={handleClick} className="btn-login">Login</button>
+                    <button type="submit" onClick={handleClick} className="btn-register btn-login">Login</button>
                 </div>
             </div>
         </>
