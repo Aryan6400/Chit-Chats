@@ -3,13 +3,16 @@ import { useState } from "react";
 import { Avatar } from "@chakra-ui/react";
 import "./JoinGroup.css";
 import { useChat } from "../../context/ChatContext";
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import { useNavigate } from "react-router-dom";
 
 function JoinGroup() {
     const [name, setName] = useState("");
+    const navigate = useNavigate();
     const darkTheme = useSelector((state) => state.darkMode);
     const [groups, setGroups] = useState([]);
     const [show, setShow] = useState(false);
-    const { chats, setChats } = useChat();
+    const { chats, setChats, setSelectedChat } = useChat();
 
     const fetchGroups = async (e) => {
         setName(e.target.value)
@@ -76,6 +79,12 @@ function JoinGroup() {
 
     return (
         <div className={"create-group-container join-group-container" + (darkTheme ? " dark-create-div" : "")}>
+            <div className="return-arrow-div">
+                <KeyboardBackspaceIcon titleAccess="back" className={"return-arrow"+(darkTheme ? " dark-theme-font" : "")} onClick={() => {
+                    setSelectedChat();
+                    navigate("/welcome");
+                }} /> <span className={darkTheme ? " dark-theme-font" : null}>Return</span>
+            </div>
             <div className="join-group">
                 <div className="join-group-search-bar">
                     <input type="text" placeholder="Enter group name" className="join-group-input" value={name} onChange={fetchGroups} onBlur={handleBlur} />

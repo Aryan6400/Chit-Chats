@@ -40,7 +40,7 @@ function Header() {
                     alignSelf="center"
                     className="return"
                 >
-                    <KeyboardBackspaceIcon titleAccess="back" className="return-arrow" onClick={() => {
+                    <KeyboardBackspaceIcon titleAccess="back" className="chat-return-arrow" onClick={() => {
                         setSelectedChat();
                         navigate("/welcome");
                     }}/>

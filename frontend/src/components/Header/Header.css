@@ -38,11 +38,11 @@
     margin-top: 1.6rem;
 }
 
-.return-arrow{
+.chat-return-arrow{
     cursor: pointer;
 }
 
-.return-arrow:hover{
+.chat-return-arrow:hover{
     box-shadow: 0 0 3px #545454;
     border-radius: 50%;
     padding: 2px;

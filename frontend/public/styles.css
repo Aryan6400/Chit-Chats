@@ -1,5 +1,5 @@
 html {
-    background-color: rgb(244, 244, 238);
+    background-color: rgb(143, 143, 143);
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -21,24 +21,25 @@ hr {
     color: white !important;
 }
 .dark-panel {
-    background-color: rgb(50, 50, 50) !important;
+    background-color: #202228 !important;
 }
+.dark-container{
+    background-color: #2A2C31 !important;
+}
+
 .dark-chat-box {
-    background-color: rgb(60, 60, 60) !important;
+    background-color: #2A2C31 !important;
     box-shadow: 0 0 1px rgb(180, 180, 180) !important;
 }
 .dark-chat-box:hover{
-    background-color: rgb(110, 110, 110) !important;
-}
-.dark-container{
-    background-image: radial-gradient(white, rgb(35, 35, 35)) !important;
+    background-color: rgb(60, 60, 60) !important;
 }
 .dark-input {
-    background-color: rgb(147, 147, 147) !important;
+    background-color: rgb(60, 60, 60) !important;
     color: white !important;
 }
 .dark-create-div{
-    background-color: rgb(60, 60, 60) !important;
+    background-color: #2A2C31 !important;
 }
 
 @media (max-width: 400px){

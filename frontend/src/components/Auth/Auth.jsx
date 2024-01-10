@@ -23,9 +23,9 @@ function Auth() {
                 <div className="auth-container">
                     {!login ? <Register /> : <Login />}
                     {login ?
-                        <p>Don't have an account? <Link className="auth-toggle-link" onClick={() => setLogin(false)}>SignUp</Link></p>
+                        <p className="auth-toggle-paragraph">Don't have an account? <Link className="auth-toggle-link" onClick={() => setLogin(false)}>SignUp</Link></p>
                         :
-                        <p>Already have an account? <Link className="auth-toggle-link" onClick={() => setLogin(true)}>Login</Link></p>
+                        <p className="auth-toggle-paragraph">Already have an account? <Link className="auth-toggle-link" onClick={() => setLogin(true)}>Login</Link></p>
                     }
                 </div>
             </Paper>

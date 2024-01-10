@@ -4,15 +4,18 @@ import "./CreateGroup.css";
 import { useState } from "react";
 import { Avatar } from "@chakra-ui/react";
 import { useChat } from "../../context/ChatContext";
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import { useNavigate } from "react-router-dom";
 
 function CreateGroup() {
   const [name, setName] = useState("");
+  const navigate= useNavigate();
   const [users, setUsers] = useState([]);
   const [show, setShow] = useState(false);
   const [user, setUser] = useState("");
   const [selectedUsers, setSelectedUsers] = useState([]);
   const darkTheme = useSelector((state) => state.darkMode);
-  const { chats, setChats } = useChat();
+  const { chats, setChats, setSelectedChat } = useChat();
 
   const handleBlur = () => {
     setTimeout(() => {
@@ -96,8 +99,14 @@ function CreateGroup() {
 
   return (
     <div className={"create-group-container" + (darkTheme ? " dark-create-div" : "")}>
+      <div className="return-arrow-div">
+        <KeyboardBackspaceIcon titleAccess="back" className={"return-arrow"+(darkTheme ? " dark-theme-font" : "")} onClick={() => {
+          setSelectedChat();
+          navigate("/welcome");
+        }} /> <span className={darkTheme ? " dark-theme-font" : null}>Return</span>
+      </div>
       <input type="text" placeholder="Enter group name" className="create-group-name-input" value={name} onChange={(e) => setName(e.target.value)} />
-      
+
       <div className="add-members">
         <div className="create-group-search-bar">
           <input type="text" placeholder="Group Members" className="create-group" value={user} onChange={fetchUsers} onBlur={handleBlur} />
