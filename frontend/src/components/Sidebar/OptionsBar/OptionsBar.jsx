@@ -123,7 +123,7 @@ function OptionsBar() {
                 </div>
                 <div className="username">
                     <h2 onClick={() => {
-                        setSelectedChat("");
+                        setSelectedChat();
                         navigate("/welcome");
                     }}>{name}</h2>
                 </div>

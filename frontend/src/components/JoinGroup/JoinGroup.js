@@ -80,7 +80,7 @@ function JoinGroup() {
                 <div className="join-group-search-bar">
                     <input type="text" placeholder="Enter group name" className="join-group-input" value={name} onChange={fetchGroups} onBlur={handleBlur} />
                 </div>
-                {show && <div className="search-results searched-groups">
+                {show && <div className="searched-groups">
                     {
                         groups.map((el, index) => {
                             return (

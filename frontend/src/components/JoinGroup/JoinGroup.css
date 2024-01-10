@@ -6,10 +6,6 @@
     width: 75%;
 }
 
-.searched-groups{
-    width: 400px;
-}
-
 .join-group-search-bar{
     width: 100%;
     display: flex;
@@ -26,4 +22,21 @@
     box-shadow: 0 0 2px rgb(210, 210, 210);
     text-align: center;
     color: black;
+}
+
+.searched-groups{
+    position: absolute;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    z-index: 5;
+    box-shadow: 3px 3px 3px rgb(153, 153, 153);
+}
+
+@media (max-width: 350px) {
+    .join-group-input{
+        min-width: 12rem;
+    }
 }

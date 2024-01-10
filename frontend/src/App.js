@@ -9,13 +9,13 @@ import "./App.css";
 import { useSelector } from "react-redux";
 import { useChat } from "./context/ChatContext";
 import JoinGroup from "./components/JoinGroup/JoinGroup";
-// import Home from "./components/Home/Home";
+import { useMediaQuery } from "@mui/material";
 
-// const ImagePopup = lazy(() => import("./components/PopupImage/PopupImage"));
 const Home = lazy(() => import("./components/Home/Home"));
 
 function App() {
   const darkTheme = useSelector((state) => state.darkMode);
+  const isMobile = useMediaQuery("(max-width: 800px)");
   const { selectedChat } = useChat();
   return (
     <BrowserRouter>
@@ -24,15 +24,15 @@ function App() {
         <Route element={<PrivateComponent />}>
           <Route path="/welcome" element={
             <div id="AppContainer" className={darkTheme ? "dark-container" : ""}>
-              <div className="App">
+              <div className={isMobile ? "App-mobile-view" : "App"}>
 
                 <div id="left-panel" className={darkTheme ? "dark-panel" : ""}>
                   <Sidebar />
                 </div>
 
-                <div id="welcome-panel" className={darkTheme ? "dark-panel" : ""}>
+                {!isMobile && <div id="welcome-panel" className={darkTheme ? "dark-panel" : ""}>
                   <Welcome />
-                </div>
+                </div>}
 
               </div>
             </div>
@@ -42,11 +42,13 @@ function App() {
         <Route element={<PrivateComponent />}>
           <Route path="/chat" element={
             <div id="AppContainer" className={darkTheme ? "dark-container" : ""}>
-              <div className="App">
+              <div className={isMobile ? "App-mobile-view" : "App"}>
 
-                <div id="left-panel" className={darkTheme ? "dark-panel" : ""}>
-                  <Sidebar />
-                </div>
+                {!isMobile &&
+                  <div id="left-panel" className={darkTheme ? "dark-panel" : ""}>
+                    <Sidebar />
+                  </div>
+                }
 
                 {selectedChat ?
                   <div id="right-panel" className={darkTheme ? "dark-panel" : ""}>
@@ -55,9 +57,14 @@ function App() {
                     </Suspense>
                   </div>
                   :
-                  <div id="welcome-panel" className={darkTheme ? "dark-panel" : ""}>
-                    <Welcome />
-                  </div>
+                  (!isMobile ?
+                    <div id="welcome-panel" className={darkTheme ? "dark-panel" : ""}>
+                      <Welcome />
+                    </div> :
+                    <div id="left-panel" className={darkTheme ? "dark-panel" : ""}>
+                      <Sidebar />
+                    </div>
+                  )
                 }
 
               </div>
@@ -68,11 +75,13 @@ function App() {
         <Route element={<PrivateComponent />}>
           <Route path="/create" element={
             <div id="AppContainer" className={darkTheme ? "dark-container" : ""}>
-              <div className="App">
+              <div className={isMobile ? "App-mobile-view" : "App"}>
 
-                <div id="left-panel" className={darkTheme ? "dark-panel" : ""}>
-                  <Sidebar />
-                </div>
+                {!isMobile &&
+                  <div id="left-panel" className={darkTheme ? "dark-panel" : ""}>
+                    <Sidebar />
+                  </div>
+                }
 
                 <div id="welcome-panel" className={darkTheme ? "dark-panel" : ""}>
                   <CreateGroup />
@@ -86,11 +95,13 @@ function App() {
         <Route element={<PrivateComponent />}>
           <Route path="/join" element={
             <div id="AppContainer" className={darkTheme ? "dark-container" : ""}>
-              <div className="App">
+              <div className={isMobile ? "App-mobile-view" : "App"}>
 
-                <div id="left-panel" className={darkTheme ? "dark-panel" : ""}>
-                  <Sidebar />
-                </div>
+                {!isMobile &&
+                  <div id="left-panel" className={darkTheme ? "dark-panel" : ""}>
+                    <Sidebar />
+                  </div>
+                }
 
                 <div id="welcome-panel" className={darkTheme ? "dark-panel" : ""}>
                   <JoinGroup />
