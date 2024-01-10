@@ -102,7 +102,7 @@ function CreateGroup() {
         <div className="create-group-search-bar">
           <input type="text" placeholder="Group Members" className="create-group" value={user} onChange={fetchUsers} onBlur={handleBlur} />
         </div>
-        {show && <div className="search-results searched-groups">
+        {show && <div className="searched-groups">
           {
             users.map((el, index) => {
               return (
