@@ -90,9 +90,43 @@
     margin-bottom: 5px;
 }
 
-@media (max-width: 950px) {
-    .chats,
-    .myChats {
-        width: 90%;
+@media (max-width: 1000px){
+    .chatText, .myChatText {
+        font-size: 0.8rem;
+    }
+    .chat .avatar img, .chat .avatar svg {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+@media (max-width: 800px){
+    .chatText, .myChatText {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 650px){
+    .chatText, .myChatText {
+        font-size: 0.85rem;
+    }
+}
+@media (max-width: 550px){
+    .chatText, .myChatText {
+        font-size: 0.8rem;
+    }
+}
+@media (max-width: 500px){
+    .chatText, .myChatText {
+        font-size: 0.75rem;
+    }
+}
+@media (max-width: 400px){
+    .chatText, .myChatText {
+        font-size: 0.7rem;
+    }
+    .chat .avatar img, .chat .avatar svg {
+        width: 20px;
+        height: 20px;
     }
 }

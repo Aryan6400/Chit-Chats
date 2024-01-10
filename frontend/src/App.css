@@ -119,6 +119,9 @@ body {
     max-width: 60px;
     min-width: 40px;
   }
+  #right-panel{
+    padding: 0 15px;
+  }
 }
 
 @media (max-width: 450px){

@@ -40,3 +40,10 @@ hr {
 .dark-create-div{
     background-color: rgb(60, 60, 60) !important;
 }
+
+@media (max-width: 400px){
+    hr {
+        margin-left: -5px;
+        margin-right: -5px;
+    }
+}
