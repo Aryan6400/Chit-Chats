@@ -61,7 +61,11 @@ function Register() {
                 if (num == 0) setPic(data.url.toString());
                 else setResizedPic(data.url.toString());
                 console.log(data.url.toString());
-                if (num == 1) setLoading(false);
+                if (num == 1){
+                    setTimeout(()=>{
+                        setLoading(false);
+                    },3000);
+                }
             }).catch(error => {
                 console.log(error);
             })
