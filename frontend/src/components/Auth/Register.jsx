@@ -70,6 +70,7 @@ function Register() {
     async function handleClick() {
         if (user.name == "" || user.username == "" || user.password == "" || picture == "") {
             alert("Please fill all the fields!!");
+            console.log(user.name, user.username, user.password, picture);
             return;
         }
         setLoading(true);
