@@ -43,7 +43,7 @@ function OptionsBar() {
         setNewUser(e.target.value);
         const userInfo = JSON.parse(localStorage.getItem("user"));
         try {
-            const response = await fetch(`http://localhost:8080/users?search=${e.target.value}`, {
+            const response = await fetch(`https://chit-chats-pi9n.onrender.com/users?search=${e.target.value}`, {
                 method: "GET",
                 cache: "no-cache",
                 credentials: "same-origin",
@@ -88,7 +88,7 @@ function OptionsBar() {
         setNewUser("");
         const userInfo = JSON.parse(localStorage.getItem("user"));
         try {
-            const response = await fetch("http://localhost:8080/chats", {
+            const response = await fetch("https://chit-chats-pi9n.onrender.com/chats", {
                 method: "POST",
                 cache: "no-cache",
                 credentials: "same-origin",

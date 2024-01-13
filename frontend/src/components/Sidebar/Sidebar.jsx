@@ -13,7 +13,7 @@ function Sidebar() {
 
     async function getChats() {
         const userInfo = JSON.parse(localStorage.getItem("user"));
-        const response = await fetch("http://localhost:8080/chats", {
+        const response = await fetch("https://chit-chats-pi9n.onrender.com/chats", {
             method: "GET",
             cache: "no-cache",
             credentials: "same-origin",

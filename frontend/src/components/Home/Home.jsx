@@ -8,7 +8,7 @@ import "./Home.css";
 import { useChat } from "../../context/ChatContext";
 import io from "socket.io-client";
 
-const ENDPOINT = "http://localhost:8080";
+const ENDPOINT = "https://chit-chats-pi9n.onrender.com";
 let socket, selectedChatCompare;
 
 function Home() {
@@ -28,7 +28,7 @@ function Home() {
     const userInfo = JSON.parse(localStorage.getItem("user"));
     if (!selectedChat) return;
     try {
-      const response = await fetch(`http://localhost:8080/messages/${selectedChat._id}`, {
+      const response = await fetch(`https://chit-chats-pi9n.onrender.com/messages/${selectedChat._id}`, {
         method: "GET",
         cache: "no-cache",
         credentials: "same-origin",
@@ -69,7 +69,7 @@ function Home() {
       chatId: selectedChat._id
     }
     try {
-      const response = await fetch("http://localhost:8080/messages", {
+      const response = await fetch("https://chit-chats-pi9n.onrender.com/messages", {
         method: "POST",
         cache: "no-cache",
         credentials: "same-origin",

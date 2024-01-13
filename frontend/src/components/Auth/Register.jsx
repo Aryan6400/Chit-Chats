@@ -81,7 +81,7 @@ function Register() {
             resizedPicture: resizedPicture
         }
         try {
-            const response = await fetch("http://localhost:8080/auth/register", {
+            const response = await fetch("https://chit-chats-pi9n.onrender.com/auth/register", {
                 method: "POST",
                 cache: "no-cache",
                 credentials: "same-origin",
@@ -94,7 +94,10 @@ function Register() {
             });
             const result = await response.json();
             if (result.user) {
+                const currentTimestamp = new Date();
+                const isoString = currentTimestamp.toISOString();
                 localStorage.setItem("user", JSON.stringify(result));
+                localStorage.setItem("timestamp", JSON.stringify(isoString));
                 navigate("/welcome");
                 setLoading(false);
             } else {
@@ -107,7 +110,7 @@ function Register() {
                 alert("Username already exists!!");
             }
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 

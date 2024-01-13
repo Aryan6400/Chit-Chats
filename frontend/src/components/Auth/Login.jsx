@@ -27,7 +27,7 @@ function Login() {
         }
         setLoading(true);
         try {
-            const response = await fetch("http://localhost:8080/auth/login", {
+            const response = await fetch("https://chit-chats-pi9n.onrender.com/auth/login", {
                 method: "POST",
                 cache: "no-cache",
                 credentials: "same-origin",
@@ -40,7 +40,10 @@ function Login() {
             });
             const result = await response.json();
             if (result.user) {
+                const currentTimestamp = new Date();
+                const isoString = currentTimestamp.toISOString();
                 localStorage.setItem("user", JSON.stringify(result));
+                localStorage.setItem("timestamp", JSON.stringify(isoString));
                 navigate("/welcome");
                 setLoading(false);
             } else {

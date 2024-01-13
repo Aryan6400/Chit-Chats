@@ -29,7 +29,7 @@ function CreateGroup() {
     setUser(e.target.value);
     const userInfo = JSON.parse(localStorage.getItem("user"));
     try {
-      const response = await fetch(`http://localhost:8080/users?search=${e.target.value}`, {
+      const response = await fetch(`https://chit-chats-pi9n.onrender.com/users?search=${e.target.value}`, {
         method: "GET",
         cache: "no-cache",
         credentials: "same-origin",
@@ -75,7 +75,7 @@ function CreateGroup() {
       userIds: userIds
     }
     try {
-      const response = await fetch("http://localhost:8080/groups", {
+      const response = await fetch("https://chit-chats-pi9n.onrender.com/groups", {
         method: "POST",
         cache: "no-cache",
         credentials: "same-origin",

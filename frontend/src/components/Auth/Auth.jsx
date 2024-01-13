@@ -13,9 +13,21 @@ function Auth() {
     
     useEffect(() => {
         const userInfo = JSON.parse(localStorage.getItem("user"));
-        if (userInfo) navigate("/welcome");
+        const timestamp = JSON.parse(localStorage.getItem("timestamp"));
+        if (userInfo && timestamp){
+            const originalTimestamp = new Date(timestamp);
+            const currentTimestamp = new Date();
+            const timeDifference = currentTimestamp-originalTimestamp;
+            const hoursDifference = timeDifference/(1000*60*60);
+            if (hoursDifference >= 12) {
+                localStorage.removeItem("user");
+                localStorage.removeItem("timestamp");
+                navigate("/");
+            } else {
+                navigate("/welcome");
+            }
+        }
     }, []);
-
     return (
         <div className={`${isMobile ? "auth-page-mobile" : "auth-page"}`}>
             {!isMobile && <div className="auth-image"></div>}
