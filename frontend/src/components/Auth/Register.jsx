@@ -39,15 +39,15 @@ function Register() {
         try {
             const result = await imageCompression(pic, options);
             const newPic = new File([result], `compressed-${pic.name}`, { lastModified: result.lastModified });
-            PostDetails(pic, 0);
-            PostDetails(newPic, 1);
+            PostDetails(pic, newPic, 0);
+            
         } catch (error) {
             console.log(error);
             setLoading(false);
         }
     }
 
-    const PostDetails = (pic, num) => {
+    const PostDetails = (pic, newPic, num) => {
         const data = new FormData();
         data.append("file", pic);
         data.append("upload_preset", "Coride Chat");
@@ -58,13 +58,14 @@ function Register() {
         })
             .then((res) => res.json())
             .then((data) => {
-                if (num == 0) setPic(data.url.toString());
-                else setResizedPic(data.url.toString());
                 console.log(data.url.toString());
-                if (num == 1){
-                    setTimeout(()=>{
-                        setLoading(false);
-                    },3000);
+                if (num === 0) {
+                    setPic(data.url.toString());
+                    PostDetails(newPic, newPic, 1);
+                }
+                else {
+                    setResizedPic(data.url.toString());
+                    setLoading(false);
                 }
             }).catch(error => {
                 console.log(error);
@@ -74,7 +75,6 @@ function Register() {
     async function handleClick() {
         if (user.name == "" || user.username == "" || user.password == "" || picture == "") {
             alert("Please fill all the fields!!");
-            console.log(user.name, user.username, user.password, picture);
             return;
         }
         setLoading(true);
